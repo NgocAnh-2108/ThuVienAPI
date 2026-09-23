@@ -1,0 +1,6 @@
+@Phan1_HostAddress = http://localhost:5106
+
+GET {{Phan1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
