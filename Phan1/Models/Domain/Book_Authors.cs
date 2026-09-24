@@ -2,7 +2,7 @@
 
 namespace Phan1.Models.Domain
 {
-    public class Book_Author
+    public class Book_Authors
     {
         public int Id { get; set; }
         public int BookId { get; set; }
