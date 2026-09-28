@@ -1,7 +1,11 @@
-﻿namespace Phan1.Models.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Phan1.Models.DTO
 {
     public class addBookRequestDTO
     {
+        [Required]
+        [MinLength(10)]
         public string? Title { get; set; }
         public string? Description { get; set; }
         public bool IsRead { get; set; }

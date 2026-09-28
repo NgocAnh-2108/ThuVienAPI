@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Phan1.CustomActionFilter;
 using Phan1.Data;
 using Phan1.Models.DTO;
 using Phan1.Repositories;
@@ -33,13 +35,21 @@ namespace Phan1.Controllers
             return Ok(bookWithIdDTO);
         }
         [HttpPost("add-book")]
+        [ValidateModel]
+        //[Authorize(Roles = "Write")]
         public IActionResult AddBook([FromBody] addBookRequestDTO addBookRequestDTO)
         {
-
-            var bookAdd = _bookRepository.AddBook(addBookRequestDTO);
-            return Ok(bookAdd);
+            if (ValidateAddBook(addBookRequestDTO))
+            {
+                var bookAdd = _bookRepository.AddBook(addBookRequestDTO);
+                return Ok(bookAdd);
+            }
+            return BadRequest(ModelState);
 
         }
+
+        
+
         [HttpPut("update-book-by-id/{id:int}")]
         public IActionResult UpdateBookById(int id, [FromBody] addBookRequestDTO bookDTO)
         {
@@ -51,6 +61,34 @@ namespace Phan1.Controllers
         {
             var deleteBook = _bookRepository.DeleteBookById(id);
             return Ok(deleteBook);
+        }
+        private bool ValidateAddBook(addBookRequestDTO addBookRequestDTO)
+        {
+            if (addBookRequestDTO == null)
+            {
+                ModelState.AddModelError(nameof(addBookRequestDTO), $"Book data is required.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(addBookRequestDTO.Description))
+            {
+                ModelState.AddModelError(nameof(addBookRequestDTO.Description), $"{nameof(addBookRequestDTO.Description)} cannot be null");
+            }
+            // kiem tra rating (0,5) 
+            if (addBookRequestDTO.Rate < 0 || addBookRequestDTO.Rate > 5)
+            {
+                ModelState.AddModelError(nameof(addBookRequestDTO.Rate), $"{nameof(addBookRequestDTO.Rate)} cannot be less than 0 and more than 5");
+            }
+            var publisherExists = _dbContext.Publishers.Any(x => x.Id == addBookRequestDTO.PublisherId);
+
+            if (!publisherExists)
+            {
+                ModelState.AddModelError(nameof(addBookRequestDTO.PublisherId),"PublisherId không tồn tại");
+            }
+            if (ModelState.ErrorCount > 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

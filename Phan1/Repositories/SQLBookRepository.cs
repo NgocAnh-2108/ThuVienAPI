@@ -73,8 +73,7 @@ namespace Phan1.Repositories
                     BookId = bookDomainModel.Id,
                     AuthorId = id
                 };
-                _dbContext.Book_Authors.Add(_book_author);
-                _dbContext.SaveChanges();
+                
             }
             return addBookRequestDTO;
         }
