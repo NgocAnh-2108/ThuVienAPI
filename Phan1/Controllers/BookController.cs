@@ -21,9 +21,9 @@ namespace Phan1.Controllers
             _bookRepository = bookRepository;
         }
         [HttpGet("get-all-books")]
-        public IActionResult GetAllBooks()
+        public IActionResult GetAllBooks([FromQuery] string? filterOn, [FromQuery] string? filterQuery , [FromQuery] string? sortBy, [FromQuery] bool isAscending, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 100)
         {
-            var allBooks = _bookRepository.GetAllBooks();
+            var allBooks = _bookRepository.GetAllBooks(filterOn, filterQuery, sortBy, isAscending, pageNumber, pageSize);
             return Ok(allBooks);
         }
 
@@ -51,9 +51,26 @@ namespace Phan1.Controllers
         
 
         [HttpPut("update-book-by-id/{id:int}")]
+        
         public IActionResult UpdateBookById(int id, [FromBody] addBookRequestDTO bookDTO)
         {
+            var bookExists = _dbContext.Books.Any(x => x.Id == id);
+
+            if (!bookExists)
+            {
+                return NotFound(new
+                {
+                    message = "Book không tồn tại"
+                });
+            }
+
+            if (!ValidateAddBook(bookDTO))
+            {
+                return BadRequest(ModelState);
+            }
+
             var updateBook = _bookRepository.UpdateBookById(id, bookDTO);
+
             return Ok(updateBook);
         }
         [HttpDelete("delete-book-by-id/{id:int}")]
