@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Phan1.Data;
 using Phan1.Repositories;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+var _logger = new LoggerConfiguration()
+.WriteTo.Console()// ghi ra console 
+.WriteTo.File("Logs/Book_log.txt", rollingInterval: RollingInterval.Minute) //ghi ra filelýu trong thý m?c Logs 
+.MinimumLevel.Information() 
+.CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(_logger);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
