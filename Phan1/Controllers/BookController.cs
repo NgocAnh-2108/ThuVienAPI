@@ -21,6 +21,7 @@ namespace Phan1.Controllers
             _bookRepository = bookRepository;
         }
         [HttpGet("get-all-books")]
+        [Authorize(Roles = "Read")]
         public IActionResult GetAllBooks([FromQuery] string? filterOn, [FromQuery] string? filterQuery , [FromQuery] string? sortBy, [FromQuery] bool isAscending, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 100)
         {
             var allBooks = _bookRepository.GetAllBooks(filterOn, filterQuery, sortBy, isAscending, pageNumber, pageSize);
@@ -29,6 +30,7 @@ namespace Phan1.Controllers
 
         [HttpGet]
         [Route("get-book-by-id/{id:int}")]
+        [Authorize(Roles = "Read")]
         public IActionResult GetBookById([FromRoute] int id)
         {
             var bookWithIdDTO = _bookRepository.GetBookById(id);
@@ -36,7 +38,7 @@ namespace Phan1.Controllers
         }
         [HttpPost("add-book")]
         [ValidateModel]
-        //[Authorize(Roles = "Write")]
+        [Authorize(Roles = "Write")]
         public IActionResult AddBook([FromBody] addBookRequestDTO addBookRequestDTO)
         {
             if (ValidateAddBook(addBookRequestDTO))
@@ -51,7 +53,8 @@ namespace Phan1.Controllers
         
 
         [HttpPut("update-book-by-id/{id:int}")]
-        
+        [Authorize(Roles = "Write")]
+
         public IActionResult UpdateBookById(int id, [FromBody] addBookRequestDTO bookDTO)
         {
             var bookExists = _dbContext.Books.Any(x => x.Id == id);
@@ -74,6 +77,7 @@ namespace Phan1.Controllers
             return Ok(updateBook);
         }
         [HttpDelete("delete-book-by-id/{id:int}")]
+        [Authorize(Roles = "Write")]
         public IActionResult DeleteBookById(int id)
         {
             var deleteBook = _bookRepository.DeleteBookById(id);

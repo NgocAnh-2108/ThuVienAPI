@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Phan1.Data;
 using Phan1.Models.Domain;
 using Phan1.Models.DTO;
@@ -7,6 +8,7 @@ using Phan1.Repositories;
 namespace Phan1.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class AuthorsController : Controller
     {
