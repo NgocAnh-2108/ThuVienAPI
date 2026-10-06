@@ -1,0 +1,27 @@
+2026-10-06 09:37:04.590 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7141/api/Book/add-book - application/json 271
+2026-10-06 09:37:04.689 +07:00 [INF] Executing endpoint 'Phan1.Controllers.BookController.AddBook (Phan1)'
+2026-10-06 09:37:04.756 +07:00 [INF] Route matched with {action = "AddBook", controller = "Book"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddBook(Phan1.Models.DTO.addBookRequestDTO) on controller Phan1.Controllers.BookController (Phan1).
+2026-10-06 09:37:04.880 +07:00 [INF] Executed DbCommand (16ms) [Parameters=[@__addBookRequestDTO_PublisherId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Publishers] AS [p]
+        WHERE [p].[Id] = @__addBookRequestDTO_PublisherId_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-10-06 09:37:05.042 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (DbType = Boolean), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Books] ([CoverUrl], [DateAdded], [DateRead], [Description], [Genre], [IsRead], [PublisherId], [Rate], [Title])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-10-06 09:37:05.141 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Book_Authors] ([AuthorId], [BookId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+2026-10-06 09:37:05.153 +07:00 [INF] Executing OkObjectResult, writing value of type 'Phan1.Models.DTO.addBookRequestDTO'.
+2026-10-06 09:37:05.163 +07:00 [INF] Executed action Phan1.Controllers.BookController.AddBook (Phan1) in 399.9086ms
+2026-10-06 09:37:05.204 +07:00 [INF] Executed endpoint 'Phan1.Controllers.BookController.AddBook (Phan1)'
+2026-10-06 09:37:05.207 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7141/api/Book/add-book - 200 null application/json; charset=utf-8 617.0205ms

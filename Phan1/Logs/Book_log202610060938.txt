@@ -1,0 +1,34 @@
+2026-10-06 09:38:00.909 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7141/api/Images/Upload - multipart/form-data; boundary=----WebKitFormBoundaryfsPTeLxOn1y8FvsE 363402
+2026-10-06 09:38:00.994 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.Upload (Phan1)'
+2026-10-06 09:38:01.061 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Upload(Phan1.Models.DTO.ImageUploadRequestDTO) on controller Phan1.Controllers.ImagesController (Phan1).
+2026-10-06 09:38:01.356 +07:00 [INF] Executed DbCommand (28ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Images] ([FileDescription], [FileExtension], [FileName], [FilePath], [FileSizeInBytes])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2026-10-06 09:38:01.406 +07:00 [INF] Executing OkObjectResult, writing value of type 'Phan1.Models.Domain.Image'.
+2026-10-06 09:38:01.486 +07:00 [INF] Executed action Phan1.Controllers.ImagesController.Upload (Phan1) in 383.818ms
+2026-10-06 09:38:01.495 +07:00 [INF] Executed endpoint 'Phan1.Controllers.ImagesController.Upload (Phan1)'
+2026-10-06 09:38:01.507 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7141/api/Images/Upload - 200 null application/json; charset=utf-8 598.8781ms
+2026-10-06 09:38:11.697 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7141/api/Images - null null
+2026-10-06 09:38:11.703 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.GetAllInfoImages (Phan1)'
+2026-10-06 09:38:11.707 +07:00 [INF] Route matched with {action = "GetAllInfoImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetAllInfoImages() on controller Phan1.Controllers.ImagesController (Phan1).
+2026-10-06 09:38:11.729 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+2026-10-06 09:38:11.733 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Phan1.Models.Domain.Image, Phan1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-10-06 09:38:11.736 +07:00 [INF] Executed action Phan1.Controllers.ImagesController.GetAllInfoImages (Phan1) in 26.3558ms
+2026-10-06 09:38:11.738 +07:00 [INF] Executed endpoint 'Phan1.Controllers.ImagesController.GetAllInfoImages (Phan1)'
+2026-10-06 09:38:11.740 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7141/api/Images - 200 null application/json; charset=utf-8 43.0204ms
+2026-10-06 09:38:23.404 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7141/api/Images/Download?id=1 - null null
+2026-10-06 09:38:23.421 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.DownloadImage (Phan1)'
+2026-10-06 09:38:23.426 +07:00 [INF] Route matched with {action = "DownloadImage", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DownloadImage(Int32) on controller Phan1.Controllers.ImagesController (Phan1).
+2026-10-06 09:38:23.458 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[@__Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__Id_0
+2026-10-06 09:38:23.470 +07:00 [INF] Executing FileContentResult, sending file with download name 'khachsan.jpg' ...
+2026-10-06 09:38:23.508 +07:00 [INF] Executed action Phan1.Controllers.ImagesController.DownloadImage (Phan1) in 78.8784ms
+2026-10-06 09:38:23.513 +07:00 [INF] Executed endpoint 'Phan1.Controllers.ImagesController.DownloadImage (Phan1)'
+2026-10-06 09:38:23.514 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7141/api/Images/Download?id=1 - 200 189225 application/octet-stream 110.4902ms

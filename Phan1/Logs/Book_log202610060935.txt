@@ -1,0 +1,48 @@
+2026-10-06 09:35:02.906 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7141/api/User/Login - application/json 60
+2026-10-06 09:35:02.921 +07:00 [INF] Executing endpoint 'Phan1.Controllers.UserController.Login (Phan1)'
+2026-10-06 09:35:02.931 +07:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Phan1.Models.DTO.LoginRequestDTO) on controller Phan1.Controllers.UserController (Phan1).
+2026-10-06 09:35:03.016 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-10-06 09:35:03.211 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2026-10-06 09:35:03.222 +07:00 [INF] Executing OkObjectResult, writing value of type 'Phan1.Models.DTO.LoginResponseDTO'.
+2026-10-06 09:35:03.232 +07:00 [INF] Executed action Phan1.Controllers.UserController.Login (Phan1) in 286.3298ms
+2026-10-06 09:35:03.254 +07:00 [INF] Executed endpoint 'Phan1.Controllers.UserController.Login (Phan1)'
+2026-10-06 09:35:03.256 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7141/api/User/Login - 200 null application/json; charset=utf-8 351.4303ms
+2026-10-06 09:35:32.817 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7141/api/Book/get-all-books - null null
+2026-10-06 09:35:32.826 +07:00 [INF] Executing endpoint 'Phan1.Controllers.BookController.GetAllBooks (Phan1)'
+2026-10-06 09:35:32.828 +07:00 [INF] Route matched with {action = "GetAllBooks", controller = "Book"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllBooks(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Phan1.Controllers.BookController (Phan1).
+2026-10-06 09:35:32.836 +07:00 [INF] GetAll Book Action method was invoked
+2026-10-06 09:35:32.838 +07:00 [WRN] This is a warning log
+2026-10-06 09:35:32.839 +07:00 [ERR] This is a error log
+2026-10-06 09:35:32.914 +07:00 [INF] Executed DbCommand (50ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsRead], [t].[c], [t].[c0], [t].[Genre], [t].[CoverUrl], [t].[Name], [t].[Id0], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [b].[Id], [b].[Title], [b].[Description], [b].[IsRead], CASE
+        WHEN [b].[IsRead] = CAST(1 AS bit) THEN [b].[DateRead]
+        ELSE NULL
+    END AS [c], CASE
+        WHEN [b].[IsRead] = CAST(1 AS bit) THEN [b].[Rate]
+        ELSE NULL
+    END AS [c0], [b].[Genre], [b].[CoverUrl], [p].[Name], [p].[Id] AS [Id0]
+    FROM [Books] AS [b]
+    INNER JOIN [Publishers] AS [p] ON [b].[PublisherId] = [p].[Id]
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN (
+    SELECT [a].[FullName], [b0].[Id], [a].[Id] AS [Id0], [b0].[BookId]
+    FROM [Book_Authors] AS [b0]
+    INNER JOIN [Authors] AS [a] ON [b0].[AuthorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[BookId]
+ORDER BY [t].[Id], [t].[Id0], [t0].[Id]
+2026-10-06 09:35:32.922 +07:00 [INF] Finished GetAllBook request with data [{"Id":1,"Title":"Cho t\u00F4i xin m\u1ED9t v\u00E9 \u0111i tu\u1ED5i th\u01A1","Description":"Truy\u1EC7n tu\u1ED5i th\u01A1","IsRead":true,"DateRead":"2026-09-24T14:06:58.61","Rate":5,"Genre":"V\u0103n h\u1ECDc","CoverUrl":"book1.jpg","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":["Nguy\u1EC5n Nh\u1EADt \u00C1nh"]},{"Id":2,"Title":"D\u1EBF M\u00E8n phi\u00EAu l\u01B0u k\u00FD","Description":"Truy\u1EC7n thi\u1EBFu nhi","IsRead":true,"DateRead":"2026-09-24T14:06:58.61","Rate":5,"Genre":"Thi\u1EBFu nhi","CoverUrl":"book2.jpg","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":["T\u00F4 Ho\u00E0i"]},{"Id":4,"Title":"stringstri","Description":"string","IsRead":true,"DateRead":"2026-09-28T08:39:18.51","Rate":1,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":[]},{"Id":5,"Title":"M\u1EB7t tr\u1EDDi nh\u1ECF","Description":"Truy\u1EC7n thi\u1EBFu nhi","IsRead":true,"DateRead":"2026-09-28T08:42:13.523","Rate":1,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Tr\u1EBB","AuthorNames":[]},{"Id":6,"Title":"L\u1EADp tr\u00ECnh web","Description":"string","IsRead":true,"DateRead":"2026-09-29T06:38:57.575","Rate":5,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":[]},{"Id":7,"Title":"Hoa m\u1ED9c lan","Description":"Truy\u1EC7n c\u1ED5 t\u00EDch","IsRead":true,"DateRead":"2026-10-01T07:10:07.835","Rate":5,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":["Nguy\u1EC5n Nh\u1EADt \u00C1nh"]},{"Id":8,"Title":"strihhhhhhhhhh","Description":"string","IsRead":true,"DateRead":"2026-09-29T07:09:03.067","Rate":0,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":["Nguy\u1EC5n Nh\u1EADt \u00C1nh"]},{"Id":9,"Title":"M\u1EB7t tr\u1EDDi b\u1EF1","Description":"string","IsRead":true,"DateRead":"2026-09-29T07:12:20.713","Rate":4,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":[]},{"Id":10,"Title":"M\u1EB7t tr\u1EDDi to l\u1EDBn","Description":"string","IsRead":true,"DateRead":"2026-09-29T07:12:45.461","Rate":5,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":[]},{"Id":11,"Title":"Nh\u1EADt k\u00FD tu\u1ED5i tr\u1EBB","Description":"string","IsRead":true,"DateRead":"2026-09-29T08:41:02.56","Rate":1,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":[]},{"Id":12,"Title":"stringstri","Description":"string","IsRead":true,"DateRead":"2026-09-29T08:49:21.157","Rate":4,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":["Ng\u1ECDc \u00C1nh"]},{"Id":13,"Title":"Hoa m\u1EB7t tr\u1EDDi","Description":"Truy\u1EC7n thi\u1EBFu nhi","IsRead":true,"DateRead":"2026-10-01T07:08:27.388","Rate":4,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Kim \u0110\u1ED3ng","AuthorNames":["Nguy\u1EC5n Nh\u1EADt \u00C1nh"]},{"Id":14,"Title":"Ch\u00FAng ta l\u00E0 l\u0169 qu\u1EF7 tr\u00EAn r\u1EEBng","Description":"Truy\u1EC7n c\u1ED5 t\u00EDch","IsRead":true,"DateRead":"2026-10-01T07:33:16.945","Rate":4,"Genre":"string","CoverUrl":"string","DateAdded":"0001-01-01T00:00:00","PublisherName":"NXB Tr\u1EBB","AuthorNames":["T\u00F4 Ho\u00E0i"]}]
+2026-10-06 09:35:32.930 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Phan1.Models.DTO.BookWithAuthorAndPublisherDTO, Phan1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-10-06 09:35:32.934 +07:00 [INF] Executed action Phan1.Controllers.BookController.GetAllBooks (Phan1) in 102.3359ms
+2026-10-06 09:35:32.936 +07:00 [INF] Executed endpoint 'Phan1.Controllers.BookController.GetAllBooks (Phan1)'
+2026-10-06 09:35:32.940 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7141/api/Book/get-all-books - 200 null application/json; charset=utf-8 123.7787ms
