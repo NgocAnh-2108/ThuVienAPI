@@ -1,0 +1,2 @@
+2026-10-06 08:16:00.023 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.Upload (Phan1)'
+2026-10-06 08:16:00.090 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Upload(Phan1.Models.DTO.ImageUploadRequestDTO) on controller Phan1.Controllers.ImagesController (Phan1).

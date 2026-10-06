@@ -75,6 +75,12 @@ builder.Services.AddScoped<IPublisherRepository, SQLPublisherRepository>();
 
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
+// Ðãng k? HttpContextAccessor cho LocalImageRepository
+builder.Services.AddHttpContextAccessor();
+
+// Ðãng k? Image Repository
+builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
+
 builder.Services.AddIdentityCore<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("Book")

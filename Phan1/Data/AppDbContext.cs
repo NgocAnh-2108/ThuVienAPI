@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Phan1.Models.Domain;
 
+
 namespace Phan1.Data
 {
     public class AppDbContext:DbContext
@@ -24,5 +25,6 @@ namespace Phan1.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book_Authors> Book_Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 }

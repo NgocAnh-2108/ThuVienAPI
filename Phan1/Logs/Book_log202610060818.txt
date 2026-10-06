@@ -1,0 +1,13 @@
+2026-10-06 08:18:23.359 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7141/api/Images/Upload - multipart/form-data; boundary=----WebKitFormBoundarywGIJXeeaUmjHVXGM 189627
+2026-10-06 08:18:26.220 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.Upload (Phan1)'
+2026-10-06 08:18:26.282 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Upload(Phan1.Models.DTO.ImageUploadRequestDTO) on controller Phan1.Controllers.ImagesController (Phan1).
+2026-10-06 08:18:31.516 +07:00 [INF] Executed DbCommand (206ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Images] ([FileDescription], [FileExtension], [FileName], [FilePath], [FileSizeInBytes])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2026-10-06 08:18:31.715 +07:00 [INF] Executing OkObjectResult, writing value of type 'Phan1.Models.Domain.Image'.
+2026-10-06 08:18:31.767 +07:00 [INF] Executed action Phan1.Controllers.ImagesController.Upload (Phan1) in 5474.9412ms
+2026-10-06 08:18:31.772 +07:00 [INF] Executed endpoint 'Phan1.Controllers.ImagesController.Upload (Phan1)'
+2026-10-06 08:18:31.793 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7141/api/Images/Upload - 200 null application/json; charset=utf-8 8436.2011ms

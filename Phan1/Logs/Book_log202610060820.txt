@@ -1,0 +1,11 @@
+2026-10-06 08:20:20.341 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7141/api/Images/Download?id=1 - null null
+2026-10-06 08:20:20.434 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.DownloadImage (Phan1)'
+2026-10-06 08:20:20.473 +07:00 [INF] Route matched with {action = "DownloadImage", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DownloadImage(Int32) on controller Phan1.Controllers.ImagesController (Phan1).
+2026-10-06 08:20:20.785 +07:00 [INF] Executed DbCommand (18ms) [Parameters=[@__Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__Id_0
+2026-10-06 08:20:20.805 +07:00 [INF] Executing FileContentResult, sending file with download name 'khachsan.jpg' ...
+2026-10-06 08:20:20.884 +07:00 [INF] Executed action Phan1.Controllers.ImagesController.DownloadImage (Phan1) in 404.8946ms
+2026-10-06 08:20:20.895 +07:00 [INF] Executed endpoint 'Phan1.Controllers.ImagesController.DownloadImage (Phan1)'
+2026-10-06 08:20:20.898 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7141/api/Images/Download?id=1 - 200 189225 application/octet-stream 570.4766ms

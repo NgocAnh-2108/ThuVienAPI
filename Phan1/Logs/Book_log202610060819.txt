@@ -1,0 +1,10 @@
+2026-10-06 08:19:45.760 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7141/api/Images - null null
+2026-10-06 08:19:45.798 +07:00 [INF] Executing endpoint 'Phan1.Controllers.ImagesController.GetAllInfoImages (Phan1)'
+2026-10-06 08:19:45.808 +07:00 [INF] Route matched with {action = "GetAllInfoImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetAllInfoImages() on controller Phan1.Controllers.ImagesController (Phan1).
+2026-10-06 08:19:46.373 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+2026-10-06 08:19:46.391 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Phan1.Models.Domain.Image, Phan1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-10-06 08:19:46.403 +07:00 [INF] Executed action Phan1.Controllers.ImagesController.GetAllInfoImages (Phan1) in 588.9734ms
+2026-10-06 08:19:46.409 +07:00 [INF] Executed endpoint 'Phan1.Controllers.ImagesController.GetAllInfoImages (Phan1)'
+2026-10-06 08:19:46.412 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7141/api/Images - 200 null application/json; charset=utf-8 652.6004ms
